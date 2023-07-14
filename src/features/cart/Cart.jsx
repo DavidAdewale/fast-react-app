@@ -3,13 +3,15 @@ import LinkButton from '../../ui/LinkButton';
 import Button from '../../ui/Button';
 import CartItem from './CartItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearCart, getCart } from './cartSlice';
+import { clearCart, getCart, getTotalCartPrice } from './cartSlice';
 import { getUserName } from '../user/userSlice';
 import EmptyCart from './EmptyCart';
+import { formatCurrency } from '../../utilities/helpers';
 
 function Cart() {
   const cart = useSelector(getCart);
   const username = useSelector(getUserName);
+  const totalCartPrice = useSelector(getTotalCartPrice);
   const dispatch = useDispatch();
 
   function handleClearCart() {
@@ -28,6 +30,10 @@ function Cart() {
           <CartItem item={item} key={item.pizzaId} />
         ))}
       </ul>
+      <div className="mt-3 flex items-center justify-between py-3 text-lg font-semibold">
+        <h2>Total</h2>
+        <p>{formatCurrency(totalCartPrice)}</p>
+      </div>
       <div className="mt-6 space-x-2">
         <Button to="/order/new" type="primary">
           Order Pizzas
