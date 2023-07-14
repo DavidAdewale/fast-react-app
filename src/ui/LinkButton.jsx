@@ -21,7 +21,7 @@ function LinkButton({ children, to }) {
 }
 
 LinkButton.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.string,
   to: PropTypes.string,
 };
 
